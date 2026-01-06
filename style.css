@@ -706,7 +706,7 @@ img {
     .about-text p {
         text-align: center;
         font-size: 1rem;
-        max-width: 600px;
+        /* max-width: 600px; */
     }
 
     .about-image {
@@ -715,7 +715,7 @@ img {
     }
 
     .about-image img{
-        width: 350px;
+        width: 400px;
     }
 
 
@@ -748,6 +748,44 @@ img {
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+
+    .contact-info {
+        order: 2;
+    }
+
+    .contact-form {
+        order: 1;
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 768px) {
+    
+    .about-text {
+        order: 1;
+        /* Text first on mobile */
+    }
+
+    .about-text p {
+        text-align: center;
+        font-size: 1rem;
+        max-width: 600px;
+    }
+
+    .about-image {
+        order: 2;
+        
+    }
+
+    .about-image img{
+        width: 350px;
+    }
+
+
+    .skill-category {
+        flex: 1 1 100%;
     }
 
     .contact-info {
