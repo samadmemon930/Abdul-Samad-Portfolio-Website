@@ -629,11 +629,11 @@ img {
     }
 
     .section-title {
-        /* font-size: 2.25rem; */
+        font-size: 2.25rem;
     }
 
     .section-subtitle {
-        /* font-size: 1.25rem; */
+        font-size: 1.25rem;
     }
 
     .navbar {
@@ -683,11 +683,11 @@ img {
     }
 
     .home-content h1 {
-        /* font-size: 3rem; */
+        font-size: 3rem;
     }
 
     .home-content h2 {
-        /* font-size: 2.5rem; */
+        font-size: 2.5rem;
     }
 
     /* About, Skills, Contact stacking */
@@ -705,7 +705,7 @@ img {
 
     .about-text p {
         text-align: center;
-        font-size: 1.125rem;
+        font-size: 1rem;
         /* max-width: 600px; */
     }
 
