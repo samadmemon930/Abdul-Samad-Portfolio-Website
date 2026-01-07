@@ -12,7 +12,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    scroll-behavior: smooth;
 }
 
 html,
@@ -21,19 +20,11 @@ body {
     color: var(--text-color);
     font-family: var(--font-family);
     line-height: 1.6;
+    scroll-behavior: smooth;
     overflow-x: hidden;
 }
 
-a {
-    text-decoration: none;
-    color: var(--text-color);
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
+/* Reusable Classes */
 
 .neon-text {
     color: var(--neon-color);
@@ -42,9 +33,7 @@ img {
 
 .section {
     padding: 3.75rem 7rem;
-    overflow-x: hidden;
-    /* For animation purposes */
-    scroll-margin-top: 3.75rem;
+    scroll-padding-top: 3.75rem;
 }
 
 .section-title {
@@ -90,6 +79,7 @@ img {
     letter-spacing: 1px;
     font-size: 1.125rem;
     border: 2px solid transparent;
+    text-decoration: none;
 }
 
 .primary-btn {
@@ -141,18 +131,19 @@ img {
 }
 
 .nav-links {
-    list-style: none;
     display: flex;
     gap: 40px;
+    list-style: none;
 }
 
 .nav-links li a {
+    text-decoration: none;
     font-weight: 400;
     position: relative;
     transition: 0.3s;
     font-size: 1.125rem;
     letter-spacing: 1px;
-    padding: 5px 0;
+    color:white;
 }
 
 .nav-links li a:hover,
@@ -169,7 +160,6 @@ img {
 
 /* ===== 1. Home Section (Home) ===== */
 .home {
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -269,7 +259,6 @@ img {
 
 .skills-container-bar {
     max-width: 800px;
-    /* Width limit jaisa image mein hai */
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -306,22 +295,10 @@ img {
 .progress-bar-fill {
     height: 100%;
     width: 0%;
-    /* Initial width 0% for animation */
     background-color: var(--neon-color);
     box-shadow: 0 0 8px var(--neon-color);
     border-radius: 5px;
-    /* Transition CSS mein nahi denge, isse JS mein dynamically manage karenge */
 }
-
-/* Responsive adjustment for small screens */
-@media (max-width: 576px) {
-    .skills-container-bar {
-        padding: 0;
-    }
-}
-
-/* Existing .skill-category aur .skill-item styling ko yahan se hata diya jayega */
-/* Kyunki ab hum progress bars use kar rahe hain */
 
 /* ===== 4. Services Section ===== */
 .services {
@@ -331,21 +308,14 @@ img {
 .services-container {
     display: flex;
     justify-content: center;
-    /* Ensures content is centered */
-
     flex-wrap: wrap;
     gap: 40px;
 }
 
 .service-box {
-    /* flex-basis ko hardcode 300px rakhne ki bajaye, minimum width set kar dein */
-    /* Isse har card ki minimum size 300px hogi, aur woh baki space lega */
     flex: 1 1 300px;
     min-width: 300px;
-    /* Ensures minimum width even when flex shrinks */
     max-width: 350px;
-    /* Option: Maximum width control karne ke liye */
-
     background: var(--secondary-bg-color);
     padding: 48px 32px;
     border-radius: 15px;
@@ -415,7 +385,6 @@ img {
 .project-card img {
     width: 100%;
     height: 200px;
-    /* object-fit: cover; */
 }
 
 .project-content {
@@ -441,6 +410,7 @@ img {
     margin-right: 20px;
     font-weight: 500;
     font-size: 17px;
+    text-decoration: none;
 
 }
 
@@ -595,6 +565,10 @@ img {
         padding: 1rem 4rem;
     }
 
+    .home{
+        padding:0 4rem
+    }
+
     .about-text p {
         font-size: 18px;
     }
@@ -612,6 +586,10 @@ img {
         padding: 1rem 3rem;
     }
 
+    .home{
+        padding:0 3rem
+    }
+
     .about-container {
         gap: 4rem;
     }
@@ -624,8 +602,7 @@ img {
 /* ===== Responsive Design (Mobile First) ===== */
 @media (max-width: 992px) {
     .section {
-        padding-left: 16px;
-        padding-right: 16px;
+        padding-inline: 16px;
     }
 
     .section-title {
@@ -655,7 +632,6 @@ img {
     .nav-links {
         position: fixed;
         top: 65px;
-        /* Navbar height */
         right: 0;
         background-color: var(--secondary-bg-color);
         width: 100%;
@@ -677,7 +653,7 @@ img {
 
     /* Home Section adjustments */
     .home {
-        padding: 16px 0;
+        padding: 0 16px;
         margin-top: 9rem;
         scroll-margin-top: 9rem;
     }
@@ -710,14 +686,12 @@ img {
     }
 
     .about-image {
-        order: 2;
-        
+        order: 2; 
     }
 
     .about-image img{
         width: 400px;
     }
-
 
     .skill-category {
         flex: 1 1 100%;
@@ -765,6 +739,13 @@ img {
 @media (max-width:768px){
     .about-image img{
         width: 350px;
+    }
+}
+
+
+@media (max-width: 576px) {
+    .skills-container-bar {
+        padding: 0;
     }
 }
 
