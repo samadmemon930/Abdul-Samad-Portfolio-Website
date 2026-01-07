@@ -33,7 +33,7 @@ body {
 
 .section {
     padding: 3.75rem 7rem;
-    scroll-padding-top: 3.75rem;
+    scroll-margin-top: 3.75rem;
 }
 
 .section-title {
