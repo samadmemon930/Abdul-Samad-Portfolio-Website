@@ -740,6 +740,10 @@ body {
     .about-image img{
         width: 350px;
     }
+
+    .about-text p{
+        max-width: 600px;
+    }
 }
 
 
