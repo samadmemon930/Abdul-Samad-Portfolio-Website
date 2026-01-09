@@ -11,14 +11,13 @@ const handleActiveNavLinks = () => {
     const navLinks = document.querySelectorAll('.nav-link');
     let currentSection = ""; 
 
-    // Jab scroll 0 par ho to kisi ko active na karein ya default logic chalayein
     const scrollPos = window.pageYOffset;
 
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionId = section.getAttribute('id');
-        // Home ke liye adjustment taake thora scroll karte hi active ho
-        const adjustment = sectionId === 'home' ? 50 : 100;
+        // Home ke liye adjustment kam rakhein taake foran active na ho
+        const adjustment = sectionId === 'home' ? 20 : 100;
 
         if (scrollPos >= sectionTop - adjustment) {
             currentSection = sectionId;
@@ -27,22 +26,19 @@ const handleActiveNavLinks = () => {
 
     navLinks.forEach(link => {
         link.classList.remove('active');
-        const href = link.getAttribute('href');
-        
-        if (href === `#${currentSection}`) {
+        if (link.getAttribute('href') === `#${currentSection}`) {
             link.classList.add('active');
             
-            // URL update sirf tab karein jab user ne scroll kiya ho
-            if (currentSection !== "" && window.location.hash !== `#${currentSection}`) {
+            // URL update sirf tab jab user scroll kare
+            if (scrollPos > 10 && window.location.hash !== `#${currentSection}`) {
                 history.replaceState(null, null, `#${currentSection}`);
             }
         }
     });
 
-    // Agar user bilkul top par hai to hash hata do (Clean URL)
-    if (scrollPos < 10 && window.location.hash !== "") {
-        history.replaceState(null, null, window.location.pathname);
-        // Home ko active rakhna hai to:
+    // Top par URL clean rakhein
+    if (scrollPos < 10) {
+        if (window.location.hash !== "") history.replaceState(null, null, window.location.pathname);
         document.querySelector('a[href="#home"]')?.classList.add('active');
     }
 };
@@ -51,18 +47,20 @@ const handleActiveNavLinks = () => {
 const scrollToHashInstant = () => {
     const hash = window.location.hash;
     
-    // Agar hash pehle se hai (like refresh on #about), tabhi scroll karein
+    // Agar URL me pehle se hash hai (About/Services etc), to wahi scroll kare
     if (hash && hash !== '#home') {
         const targetElement = document.querySelector(hash);
         if (targetElement) {
             const headerOffset = 60;
-            const offsetPosition = targetElement.offsetTop - headerOffset;
-            window.scrollTo({ top: offsetPosition, behavior: 'auto' });
+            window.scrollTo({ top: targetElement.offsetTop - headerOffset, behavior: 'auto' });
         }
     } else {
-        // Agar page fresh load ho raha hai (#home ya no hash), to bilkul top par rakhein
+        // Home ya Empty URL par bilkul Top (0,0) par rakhe
         window.scrollTo(0, 0);
     }
+    
+    // Home content ko foran dikhane ke liye
+    handleScrollAnimations(true); 
     handleActiveNavLinks();
 };
 
@@ -109,12 +107,31 @@ document.addEventListener('DOMContentLoaded', () => {
     scrollToHashInstant();
 });
 
+// --- Updated checkAllLoaded for precise refresh positioning ---
 function checkAllLoaded() {
     if (aboutLoaded && skillsLoaded && projectsLoaded) {
-        // Data load hone ke baad check karein ke humein kisi hash par to nahi jana
-        if (window.location.hash && window.location.hash !== '#home') {
-            scrollToHashInstant();
+        const hash = window.location.hash;
+        
+        // Agar URL mein koi specific section hai (#projects, #services etc.)
+        if (hash && hash !== '#home') {
+            const targetElement = document.querySelector(hash);
+            if (targetElement) {
+                const headerOffset = 60;
+                const offsetPosition = targetElement.offsetTop - headerOffset;
+                
+                // Foran wahi scroll karwao taake jump nazar na aaye
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'auto' 
+                });
+            }
         }
+        
+        // Content animations ko trigger karein
+        handleScrollAnimations(true);
+        handleActiveNavLinks();
+        
+        // Future clicks ke liye smooth scroll on karein
         document.documentElement.classList.add('smooth-scroll');
     }
 }
